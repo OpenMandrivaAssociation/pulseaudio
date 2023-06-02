@@ -124,19 +124,19 @@ Requires(post):	ccp
 Conflicts:	%{libname} < 0.9.7-2
 Obsoletes:	%{mklibname pulsezeroconf 0} < 1.0
 # (cg) libpulsecore has been moved to a dlopen'ed system.
-Obsoletes:	%{mklibname pulsecore 1}
-Obsoletes:	%{mklibname pulsecore 2}
-Obsoletes:	%{mklibname pulsecore 3}
-Obsoletes:	%{mklibname pulsecore 4}
-Obsoletes:	%{mklibname pulsecore 5}
-Obsoletes:	%{mklibname pulsecore 6}
-Obsoletes:	%{mklibname pulsecore 7}
-Obsoletes:	%{mklibname pulsecore 8}
+Obsoletes:	%{mklibname pulsecore 1} < 16.1
+Obsoletes:	%{mklibname pulsecore 2} < 16.1
+Obsoletes:	%{mklibname pulsecore 3} < 16.1
+Obsoletes:	%{mklibname pulsecore 4} < 16.1
+Obsoletes:	%{mklibname pulsecore 5} < 16.1
+Obsoletes:	%{mklibname pulsecore 6} < 16.1
+Obsoletes:	%{mklibname pulsecore 7} < 16.1
+Obsoletes:	%{mklibname pulsecore 8} < 16.1
 Obsoletes:	%{mklibname pulsecore 7.0} < 8.0
 Obsoletes:	%{mklibname pulsecore 7.1} < 8.0
 Provides:	%{mklibname pulsecore 7.0} = 8.0
 Provides:	%{mklibname pulsecore 7.1} = 8.0
-Obsoletes:	%{mklibname pulsezeroconf 0}
+Obsoletes:	%{mklibname pulsezeroconf 0} < 16.1
 Conflicts:	%{libname} < 5.0
 Obsoletes:	%{mklibname pulsecommon 7.0} < 8.0
 Obsoletes:	%{mklibname pulsecommon 7.1} < 8.0
@@ -375,13 +375,14 @@ a PulseAudio sound server.
 %prep
 %autosetup -n %{name}-%{version}%{?git:-%{fullgit}} -p1
 %if %{with compat32}
-%meson32 -Dgtk=disabled \
+%meson32 \
+	-Dgtk=disabled \
 	-Dasyncns=disabled \
 	-Dlirc=disabled \
 	-Dwebrtc-aec=disabled \
 	-Dgstreamer=disabled \
 	-Dbluez5-gstreamer=disabled \
-	-Dsystemd=enabled \
+	-Dsystemd=disabled \
 	-Delogind=disabled \
 	-Dtcpwrap=disabled \
 	-Dudevrulesdir=%{_udevrulesdir}
@@ -394,6 +395,7 @@ export CXX=g++
 %endif
 
 %meson \
+	-Dcpp_std=gnu++17 \
 	-Dsystemd=enabled \
 	-Dudevrulesdir=%{_udevrulesdir} \
 	-Delogind=disabled \
@@ -727,7 +729,7 @@ sed -i 's/^\(\s*\)\;\?\s*\(autospawn\s*=\s*\).*/\1\; \2no/' %{_sysconfdir}/pulse
 %{_prefix}/lib/pulseaudio/modules/module-combine.so
 %{_prefix}/lib/pulseaudio/modules/module-combine-sink.so
 %{_prefix}/lib/pulseaudio/modules/module-role-cork.so
-%{_prefix}/lib/pulseaudio/modules/module-systemd-login.so
+#%{_prefix}/lib/pulseaudio/modules/module-systemd-login.so
 %{_prefix}/lib/pulseaudio/modules/module-dbus-protocol.so
 %{_prefix}/lib/pulseaudio/modules/module-detect.so
 %{_prefix}/lib/pulseaudio/modules/module-device-manager.so
