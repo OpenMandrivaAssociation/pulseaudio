@@ -39,7 +39,7 @@
 Summary:	Sound server for Linux
 Name:		pulseaudio
 Version:	16.1
-Release:	5
+Release:	6
 License:	LGPLv2+
 Group:		Sound
 Url:		http://pulseaudio.org/
@@ -376,6 +376,11 @@ a PulseAudio sound server.
 %autosetup -n %{name}-%{version}%{?git:-%{fullgit}} -p1
 %if %{with compat32}
 %meson32 \
+	-Ddoxygen=false \
+	-Dman=false \
+	-Dtests=false \
+	-Dvalgrind=disabled \
+	-Dhal-compat=false \
 	-Dgtk=disabled \
 	-Dasyncns=disabled \
 	-Dlirc=disabled \
@@ -383,6 +388,7 @@ a PulseAudio sound server.
 	-Dgstreamer=disabled \
 	-Dbluez5-gstreamer=disabled \
 	-Dsystemd=disabled \
+	-Dudev=disabled \
 	-Delogind=disabled \
 	-Dtcpwrap=disabled \
 	-Dudevrulesdir=%{_udevrulesdir}
@@ -395,7 +401,9 @@ export CXX=g++
 %endif
 
 %meson \
+	-Dtests=false \
 	-Dcpp_std=gnu++17 \
+	-Dhal-compat=false \
 	-Dsystemd=enabled \
 	-Dudevrulesdir=%{_udevrulesdir} \
 	-Delogind=disabled \
@@ -418,6 +426,11 @@ export CXX=g++
 %build
 %if %{with compat32}
 %ninja_build -C build32
+rm -rf %{buildroot}%{_includedir}/*
+rm -rf %{buildroot}%{_bindir}/*
+rm -rf %{buildroot}%{_sysconfdir}/*
+rm -rf %{buildroot}%{_datadir}/*
+rm -rf %{buildroot}%{_udevrulesdir}/*
 %endif
 %ninja_build -C build
 
@@ -561,7 +574,7 @@ sed -i 's/^\(\s*\)\;\?\s*\(autospawn\s*=\s*\).*/\1\; \2no/' %{_sysconfdir}/pulse
 %{_libdir}/pulseaudio/modules/module-device-manager.so
 %{_libdir}/pulseaudio/modules/module-device-restore.so
 %{_libdir}/pulseaudio/modules/module-echo-cancel.so
-%{_libdir}/pulseaudio/modules/module-hal-detect.so
+#%{_libdir}/pulseaudio/modules/module-hal-detect.so
 %{_libdir}/pulseaudio/modules/module-http-protocol-tcp.so
 %{_libdir}/pulseaudio/modules/module-http-protocol-unix.so
 %{_libdir}/pulseaudio/modules/module-intended-roles.so
@@ -735,7 +748,7 @@ sed -i 's/^\(\s*\)\;\?\s*\(autospawn\s*=\s*\).*/\1\; \2no/' %{_sysconfdir}/pulse
 %{_prefix}/lib/pulseaudio/modules/module-device-manager.so
 %{_prefix}/lib/pulseaudio/modules/module-device-restore.so
 %{_prefix}/lib/pulseaudio/modules/module-echo-cancel.so
-%{_prefix}/lib/pulseaudio/modules/module-hal-detect.so
+#%{_prefix}/lib/pulseaudio/modules/module-hal-detect.so
 %{_prefix}/lib/pulseaudio/modules/module-http-protocol-tcp.so
 %{_prefix}/lib/pulseaudio/modules/module-http-protocol-unix.so
 %{_prefix}/lib/pulseaudio/modules/module-intended-roles.so
@@ -763,7 +776,7 @@ sed -i 's/^\(\s*\)\;\?\s*\(autospawn\s*=\s*\).*/\1\; \2no/' %{_sysconfdir}/pulse
 %{_prefix}/lib/pulseaudio/modules/module-tunnel-source.so
 %{_prefix}/lib/pulseaudio/modules/module-tunnel-sink-new.so
 %{_prefix}/lib/pulseaudio/modules/module-tunnel-source-new.so
-%{_prefix}/lib/pulseaudio/modules/module-udev-detect.so
+#%{_prefix}/lib/pulseaudio/modules/module-udev-detect.so
 %{_prefix}/lib/pulseaudio/modules/module-volume-restore.so
 %{_prefix}/lib/pulseaudio/modules/module-virtual-sink.so
 %{_prefix}/lib/pulseaudio/modules/module-virtual-source.so
