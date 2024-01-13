@@ -38,8 +38,8 @@
 
 Summary:	Sound server for Linux
 Name:		pulseaudio
-Version:	16.1
-Release:	7
+Version:	17.0
+Release:	1
 License:	LGPLv2+
 Group:		Sound
 Url:		http://pulseaudio.org/
@@ -55,7 +55,6 @@ Patch2:		pulseaudio-13.99.1-non-x86.patch
 # Load device-manager module
 Patch3:		pulseaudio-7.1-load-module-device-manager.patch
 # OM MODIFIED VERSION: Rebased to 14.99.2
-Patch4:		https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/395.patch
 Patch5:		https://src.fedoraproject.org/rpms/pulseaudio/raw/rawhide/f/pulseaudio-11.1-autospawn_disable.patch
 Patch503:	https://raw.githubusercontent.com/clearlinux-pkgs/pulseaudio/master/lessfence.patch
 Patch504:	https://raw.githubusercontent.com/clearlinux-pkgs/pulseaudio/master/memfd.patch
@@ -523,6 +522,7 @@ sed -i 's/^\(\s*\)\;\?\s*\(autospawn\s*=\s*\).*/\1\; \2no/' %{_sysconfdir}/pulse
 %{_datadir}/icons/hicolor/*/*/*
 %dir %{_datadir}/%{name}/
 %{_datadir}/%{name}/alsa-mixer
+%{_datadir}/dbus-1/system.d/pulseaudio-system.conf
 %{_udevrulesdir}/90-pulseaudio.rules
 
 %files server
