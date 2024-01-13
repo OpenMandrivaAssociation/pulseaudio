@@ -55,7 +55,6 @@ Patch2:		pulseaudio-13.99.1-non-x86.patch
 # Load device-manager module
 Patch3:		pulseaudio-7.1-load-module-device-manager.patch
 # OM MODIFIED VERSION: Rebased to 14.99.2
-Patch4:		https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/395.patch
 Patch5:		https://src.fedoraproject.org/rpms/pulseaudio/raw/rawhide/f/pulseaudio-11.1-autospawn_disable.patch
 Patch503:	https://raw.githubusercontent.com/clearlinux-pkgs/pulseaudio/master/lessfence.patch
 Patch504:	https://raw.githubusercontent.com/clearlinux-pkgs/pulseaudio/master/memfd.patch
