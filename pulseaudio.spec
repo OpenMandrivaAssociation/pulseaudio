@@ -522,6 +522,7 @@ sed -i 's/^\(\s*\)\;\?\s*\(autospawn\s*=\s*\).*/\1\; \2no/' %{_sysconfdir}/pulse
 %{_datadir}/icons/hicolor/*/*/*
 %dir %{_datadir}/%{name}/
 %{_datadir}/%{name}/alsa-mixer
+%{_datadir}/dbus-1/system.d/pulseaudio-system.conf
 %{_udevrulesdir}/90-pulseaudio.rules
 
 %files server
