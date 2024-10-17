@@ -42,7 +42,7 @@ Version:	17.0
 Release:	1
 License:	LGPLv2+
 Group:		Sound
-Url:		http://pulseaudio.org/
+Url:		https://pulseaudio.org/
 #Source0:	%{name}-%{version}%{?git:-%{git}}.tar.xz
 Source0:	http://freedesktop.org/software/pulseaudio/releases/%{name}-%{version}%{?git:-%{fullgit}}.tar.xz
 Source1:	%{name}.sysconfig
