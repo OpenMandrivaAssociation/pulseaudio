@@ -39,7 +39,7 @@
 Summary:	Sound server for Linux
 Name:		pulseaudio
 Version:	17.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		Sound
 Url:		https://pulseaudio.org/
